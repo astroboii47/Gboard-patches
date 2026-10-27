@@ -30,4 +30,22 @@ public class GboardCursorTrackpadPreferenceTest {
         assertFalse(GboardCursorTrackpadRuntime.applyPreference(false, null));
         assertTrue(GboardCursorTrackpadRuntime.applyPreference(true, null));
     }
+
+    @Test public void enabledSwitchRemovesLockCountdown() {
+        SharedPreferences prefs = RuntimeEnvironment.getApplication()
+                .getSharedPreferences("cursor1854Lock", 0);
+        prefs.edit().clear()
+                .putBoolean(GboardCursorTrackpadSettings.PREF_KEY_ENABLED, true)
+                .commit();
+        assertEquals(Double.valueOf(0.0d), GboardCursorTrackpadRuntime.applyOverriddenFlagValue(
+                GboardCursorTrackpadPolicy.FREE_CURSOR_LOCK_COUNTDOWN_FLAG,
+                Double.valueOf(2000.0d),
+                prefs));
+
+        prefs.edit().putBoolean(GboardCursorTrackpadSettings.PREF_KEY_ENABLED, false).commit();
+        assertEquals(Double.valueOf(2000.0d), GboardCursorTrackpadRuntime.applyOverriddenFlagValue(
+                GboardCursorTrackpadPolicy.FREE_CURSOR_LOCK_COUNTDOWN_FLAG,
+                Double.valueOf(2000.0d),
+                prefs));
+    }
 }

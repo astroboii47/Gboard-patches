@@ -32,8 +32,8 @@ public final class GboardCursorTrackpadRuntime {
     public static Object applyOverriddenFlagValue(String flagName, Object stockResult) {
         try {
             if (!(GboardCursorTrackpadPolicy.FREE_CURSOR_FLAG.equals(flagName)
-                    || GboardCursorTrackpadPolicy.FREE_CURSOR_LOCK_MODE_FLAG.equals(flagName))
-                    || !Boolean.FALSE.equals(stockResult)) {
+                    || GboardCursorTrackpadPolicy.FREE_CURSOR_LOCK_MODE_FLAG.equals(flagName)
+                    || GboardCursorTrackpadPolicy.FREE_CURSOR_LOCK_COUNTDOWN_FLAG.equals(flagName))) {
                 return stockResult;
             }
             SharedPreferences preferences = GboardFlagRuntimeContext.preferencesOrNull();

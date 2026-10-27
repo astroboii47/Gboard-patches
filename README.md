@@ -213,7 +213,7 @@ Features already present in Gboard that are exposed by enabling hidden settings,
 </details>
 
 <details>
-  <summary><code>Enable cursor trackpad mode</code></summary>
+  <summary><code>Enable cursor trackpad mode</code> (with immediate locked controls)</summary>
 
   Enables the long-press-spacebar trackpad, cursor lock mode, and the required scrub-move preference.
 </details>

@@ -14,10 +14,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public final class GboardHideAccentPopupsRuntime {
     private static final String TAG = "GboardPatches";
-    private static final String LOG_PREFIX = "[gboard-hide-accent-popups-18.0.3] ";
+    private static final String LOG_PREFIX = "[gboard-hide-accent-popups-18.5.4] ";
     private static final long SETTINGS_CACHE_WINDOW_MS = 1_000L;
 
-    private static final Map<ClassLoader, WeakReference<GboardHideAccentPopups1803ReflectionHandles>>
+    private static final Map<ClassLoader, WeakReference<GboardHideAccentPopupsReflectionHandles>>
             HANDLES_BY_CLASS_LOADER = Collections.synchronizedMap(new WeakHashMap<>());
     private static final Map<Object, Object> PATCHED_METADATA_BY_ORIGINAL =
             Collections.synchronizedMap(new WeakHashMap<>());
@@ -55,7 +55,7 @@ public final class GboardHideAccentPopupsRuntime {
                 if (cached != null) {
                     return cached;
                 }
-                GboardHideAccentPopups1803ReflectionHandles handles =
+                GboardHideAccentPopupsReflectionHandles handles =
                         reflectionHandles(metadata.getClass().getClassLoader());
                 String pressText = handles.extractPressText(metadata);
                 Object patched = GboardHideAccentPopupsPolicy.isLatinLetterKey(pressText)
@@ -98,18 +98,18 @@ public final class GboardHideAccentPopupsRuntime {
         return enabled;
     }
 
-    private static GboardHideAccentPopups1803ReflectionHandles reflectionHandles(
+    private static GboardHideAccentPopupsReflectionHandles reflectionHandles(
             ClassLoader classLoader) throws Throwable {
         synchronized (HANDLES_BY_CLASS_LOADER) {
-            WeakReference<GboardHideAccentPopups1803ReflectionHandles> reference =
+            WeakReference<GboardHideAccentPopupsReflectionHandles> reference =
                     HANDLES_BY_CLASS_LOADER.get(classLoader);
-            GboardHideAccentPopups1803ReflectionHandles cached =
+            GboardHideAccentPopupsReflectionHandles cached =
                     reference == null ? null : reference.get();
             if (cached != null) {
                 return cached;
             }
-            GboardHideAccentPopups1803ReflectionHandles created =
-                    new GboardHideAccentPopups1803ReflectionHandles(classLoader);
+            GboardHideAccentPopupsReflectionHandles created =
+                    new GboardHideAccentPopupsReflectionHandles(classLoader);
             HANDLES_BY_CLASS_LOADER.put(classLoader, new WeakReference<>(created));
             return created;
         }

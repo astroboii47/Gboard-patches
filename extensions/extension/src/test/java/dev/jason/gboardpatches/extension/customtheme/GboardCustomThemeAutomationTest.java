@@ -27,8 +27,8 @@ public final class GboardCustomThemeAutomationTest {
         SharedPreferences settings = GboardPatchesSettings.preferences(context);
         settings.edit().clear().putBoolean(GboardCustomThemeSettings.ENABLED_KEY, true)
                 .putBoolean(GboardCustomThemeSettings.FOLLOW_SYSTEM_KEY, true)
-                .putString(GboardCustomThemeSettings.LIGHT_THEME_KEY, "light.zip")
-                .putString(GboardCustomThemeSettings.DARK_THEME_KEY, "dark.zip")
+                .putString(GboardCustomThemeSettings.LIGHT_THEME_KEY, "silk:light")
+                .putString(GboardCustomThemeSettings.DARK_THEME_KEY, "silk:dark")
                 .putBoolean(GboardCustomThemeSettings.LIGHT_BORDER_KEY, false)
                 .putBoolean(GboardCustomThemeSettings.DARK_BORDER_KEY, true).commit();
         Configuration configuration = new Configuration();
@@ -37,13 +37,13 @@ public final class GboardCustomThemeAutomationTest {
         target.edit().clear().commit();
 
         Assert.assertTrue(GboardCustomThemeAutoSwitcher.reconcile(context, configuration));
-        Assert.assertEquals("files:dark.zip",
+        Assert.assertEquals("silk:dark",
                 target.getString("additional_keyboard_theme", ""));
         Assert.assertTrue(target.getBoolean("enable_key_border", false));
 
         configuration.uiMode = Configuration.UI_MODE_NIGHT_NO;
         Assert.assertTrue(GboardCustomThemeAutoSwitcher.reconcile(context, configuration));
-        Assert.assertEquals("files:light.zip",
+        Assert.assertEquals("silk:light",
                 target.getString("additional_keyboard_theme", ""));
         Assert.assertFalse(target.getBoolean("enable_key_border", true));
     }

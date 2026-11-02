@@ -195,8 +195,10 @@ public final class GboardCursorTrackpadRuntime {
     private static boolean isFeatureEnabledFromHandler(Object handler) {
         Object context = findFieldValue(handler, "o");
         if (context instanceof android.content.Context) {
-            return GboardCursorTrackpadSettings.readEnabled(
-                    GboardPatchesSettings.preferences((android.content.Context) context));
+            return GboardPatchesSettings.readRuntimeSetting(
+                    (android.content.Context) context,
+                    GboardCursorTrackpadSettings::readEnabled,
+                    false);
         }
         return false;
     }
@@ -256,9 +258,10 @@ public final class GboardCursorTrackpadRuntime {
                     contextField.setAccessible(true);
                     Object context = contextField.get(keyboard);
                     if (context instanceof android.content.Context) {
-                        SharedPreferences preferences = GboardPatchesSettings.preferences(
-                                (android.content.Context) context);
-                        return GboardCursorTrackpadSettings.readEnabled(preferences);
+                        return GboardPatchesSettings.readRuntimeSetting(
+                                (android.content.Context) context,
+                                GboardCursorTrackpadSettings::readEnabled,
+                                false);
                     }
                 } catch (NoSuchFieldException ignored) {
                     type = type.getSuperclass();

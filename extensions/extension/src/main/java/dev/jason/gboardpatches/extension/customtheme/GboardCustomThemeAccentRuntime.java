@@ -1,6 +1,5 @@
 package dev.jason.gboardpatches.extension.customtheme;
 
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -19,14 +18,19 @@ public final class GboardCustomThemeAccentRuntime {
         try {
             if (!".keytop.for-action-key".equals(selector)
                     || !(inflater instanceof LayoutInflater)) return stock;
-            SharedPreferences preferences = GboardPatchesSettings.preferences(
-                    ((LayoutInflater) inflater).getContext());
-            if (!GboardCustomThemeSettings.readEnabled(preferences)) return stock;
-            String value = GboardCustomThemeSettings.accent(preferences);
-            if (GboardCustomThemeSettings.DEFAULT_ACCENT.equals(value)) return stock;
-            String normalized = GboardSpacebarLogoSettings.tryNormalizeColorHex(value);
-            Log.i(TAG, "accent=" + value + " normalized=" + normalized);
-            return normalized == null ? stock : ColorStateList.valueOf(Color.parseColor(normalized));
+            return GboardPatchesSettings.readRuntimeSetting(
+                    ((LayoutInflater) inflater).getContext(),
+                    preferences -> {
+                        if (!GboardCustomThemeSettings.readEnabled(preferences)) return stock;
+                        String value = GboardCustomThemeSettings.accent(preferences);
+                        if (GboardCustomThemeSettings.DEFAULT_ACCENT.equals(value)) return stock;
+                        String normalized = GboardSpacebarLogoSettings.tryNormalizeColorHex(value);
+                        Log.i(TAG, "accent=" + value + " normalized=" + normalized);
+                        return normalized == null
+                                ? stock
+                                : ColorStateList.valueOf(Color.parseColor(normalized));
+                    },
+                    stock);
         } catch (Throwable failure) {
             Log.w(TAG, "accent hook failed", failure);
             return stock;

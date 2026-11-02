@@ -2,7 +2,6 @@ package dev.jason.gboardpatches.extension.backspaceswipe;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.lang.reflect.Field;
@@ -80,8 +79,10 @@ public final class GboardBackspaceSwipeRuntime {
             Application app = (Application) Class.forName("android.app.ActivityThread")
                     .getMethod("currentApplication").invoke(null);
             if (app == null) return GboardBackspaceSwipeSettings.OFF;
-            SharedPreferences preferences = GboardPatchesSettings.preferences(app);
-            return GboardBackspaceSwipeSettings.read(preferences);
+            return GboardPatchesSettings.readRuntimeSetting(
+                    app,
+                    GboardBackspaceSwipeSettings::read,
+                    GboardBackspaceSwipeSettings.OFF);
         } catch (Throwable ignored) {
             return GboardBackspaceSwipeSettings.OFF;
         }

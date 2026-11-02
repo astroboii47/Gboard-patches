@@ -28,6 +28,7 @@ import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.ref.WeakReference;
@@ -190,7 +191,7 @@ public final class GboardStockThemeColorsRuntime {
             try (ZipFile zip = new ZipFile((File) source)) {
                 ZipEntry entry = zip.getEntry("style_sheet.binarypb");
                 if (entry == null) return;
-                byte[] bytes = zip.getInputStream(entry).readAllBytes();
+                byte[] bytes = readAll(zip.getInputStream(entry));
                 Class<?> sheetClass = Class.forName("rrv");
                 Object defaultSheet = sheetClass.getField("a").get(null);
                 Class<?> protoBase = Class.forName("aaln");
@@ -319,7 +320,7 @@ public final class GboardStockThemeColorsRuntime {
             Enumeration<? extends ZipEntry> entries = input.entries();
             while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
-                byte[] data = input.getInputStream(entry).readAllBytes();
+                byte[] data = readAll(input.getInputStream(entry));
                 if ("style_sheet.binarypb".equals(entry.getName())) {
                     data = styled(data, colors);
                 } else if (solidBackground != null && "background".equals(entry.getName())) {
@@ -758,6 +759,18 @@ public final class GboardStockThemeColorsRuntime {
         Field field = owner.getClass().getDeclaredField(name);
         field.setAccessible(true);
         return field.get(owner);
+    }
+
+    private static byte[] readAll(InputStream source) throws Exception {
+        try (InputStream input = source;
+             ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[8192];
+            int count;
+            while ((count = input.read(buffer)) != -1) {
+                output.write(buffer, 0, count);
+            }
+            return output.toByteArray();
+        }
     }
 
     private static Method find(Class<?> type, String name, Class<?> parameter) throws Exception {

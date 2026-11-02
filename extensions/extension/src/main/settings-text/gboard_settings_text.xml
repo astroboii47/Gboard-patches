@@ -2131,7 +2131,7 @@
         <translation locale="zh-Hant">啟用游標觸控板模式</translation>
     </string>
     <string name="gboard_patches_cursor_trackpad_summary">
-        <translation locale="en">Long-press the space bar to open a trackpad and enter its locked controls immediately, without the extra two-second hold.</translation>
+        <translation locale="en">Long-press the space bar to open the trackpad. Move onto its lock icon to lock almost instantly, without the extra two-second hold.</translation>
         <translation locale="zh-Hant">長按空白鍵開啟游標觸控板，並立即進入鎖定控制模式，不需再額外按住兩秒。</translation>
     </string>
     <string name="gboard_patches_access_points_menu_title">

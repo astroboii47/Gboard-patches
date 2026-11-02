@@ -19,6 +19,7 @@ public final class GboardCustomThemeInstaller {
     private GboardCustomThemeInstaller() { }
 
     public static File install(Context context, File source, boolean keyBorder) throws Exception {
+        source = GboardCustomThemeAccent.apply(context, source);
         ImportedArchive imported = importArchiveWithOwnership(context, source);
         try {
             activate(context, imported.file, keyBorder);
@@ -27,6 +28,22 @@ public final class GboardCustomThemeInstaller {
             imported.rollbackActivationFailure();
             throw failure;
         }
+    }
+
+    static File importForSystemSlot(Context context, File source, boolean dark,
+            String displayName, boolean keyBorder) throws Exception {
+        source = GboardCustomThemeAccent.apply(context, source);
+        ImportedArchive imported = importArchiveWithOwnership(context, source);
+        SharedPreferences preferences =
+                dev.jason.gboardpatches.extension.settings.GboardPatchesSettings.preferences(context);
+        if (!GboardCustomThemeSettings.assign(preferences, dark, imported.file.getName(),
+                displayName, keyBorder)) {
+            imported.rollbackActivationFailure();
+            throw new IOException("Theme slot preference commit failed");
+        }
+        GboardCustomThemeAutoSwitcher.reconcile(context,
+                context.getResources().getConfiguration());
+        return imported.file;
     }
 
     static File importArchive(Context context, File source) throws Exception {

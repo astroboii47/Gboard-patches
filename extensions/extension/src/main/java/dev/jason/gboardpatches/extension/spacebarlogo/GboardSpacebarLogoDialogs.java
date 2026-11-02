@@ -35,9 +35,9 @@ import dev.jason.gboardpatches.extension.R;
 import dev.jason.gboardpatches.extension.settings.GboardPatchesSettingsContract;
 import dev.jason.gboardpatches.extension.settings.GboardSettingsText;
 
-final class GboardSpacebarLogoDialogs {
+public final class GboardSpacebarLogoDialogs {
     private static final String TAG = "GboardPatches";
-    interface SelectionConsumer {
+    public interface SelectionConsumer {
         void accept(String value);
     }
 
@@ -117,7 +117,7 @@ final class GboardSpacebarLogoDialogs {
         };
     }
 
-    static GboardPatchesSettingsContract.ManagedDialogAction colorPickerDialog(
+    public static GboardPatchesSettingsContract.ManagedDialogAction colorPickerDialog(
             Context context, String title, String opacityLabel, String codeLabel,
             String codeHint, String invalidMessage, String initialValue,
             SelectionConsumer consumer) {

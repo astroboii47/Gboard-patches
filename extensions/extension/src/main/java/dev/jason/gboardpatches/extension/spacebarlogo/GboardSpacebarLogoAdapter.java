@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+
 public final class GboardSpacebarLogoAdapter {
     private static final String TAG = "GboardPatches";
     private static final String ACTION_TYPE_CLASS = "qae";

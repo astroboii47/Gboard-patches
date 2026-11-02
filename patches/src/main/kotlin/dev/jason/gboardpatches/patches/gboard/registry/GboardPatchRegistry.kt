@@ -339,8 +339,9 @@ val gboardEmojiSizePatch = gboardPublicResourcePatch(
 val gboardCursorTrackpadPatch = gboardPublicResourcePatch(
     featureId = "enable_cursor_trackpad_mode",
     name = "Enable cursor trackpad mode",
-    description = "長按空白鍵開啟游標觸控板並立即進入鎖定控制模式\n" +
-        "Long-press the space bar to use cursor trackpad mode and immediately enter its locked controls.",
+    description = "長按空白鍵開啟游標觸控板；移到鎖定圖示時近乎立即鎖定\n" +
+        "Long-press the space bar for trackpad mode; moving onto the lock icon locks it almost instantly. " +
+        "In normal mode, hold a second finger on the pad while moving to select text.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_GBOARD)

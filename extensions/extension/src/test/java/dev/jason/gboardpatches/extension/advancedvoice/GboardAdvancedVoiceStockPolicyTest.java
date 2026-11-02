@@ -5,11 +5,10 @@ import org.junit.Test;
 
 public final class GboardAdvancedVoiceStockPolicyTest {
     @Test
-    public void sixFormalBooleanFlagsAreEnabledWithStrictTyping() {
+    public void fusedApkForcesFiveFlagsButLeavesSplitInstallerStock() {
         String[] flags = new String[] {
                 GboardAdvancedVoiceStockPolicy.ENABLE_NGA_FLAG,
                 GboardAdvancedVoiceStockPolicy.ENABLE_ADVANCED_FEATURES_FLAG,
-                GboardAdvancedVoiceStockPolicy.ENABLE_DICTATION_SPLIT_INSTALL_FLAG,
                 GboardAdvancedVoiceStockPolicy.HANDLE_FALLBACK_INSIDE_SD_STACK_FLAG,
                 GboardAdvancedVoiceStockPolicy.ENABLE_STICKY_MIC_BACKGROUND_FLAG,
                 GboardAdvancedVoiceStockPolicy.ENABLE_SODA_LONGFORM_EXPERIMENT_FLAG
@@ -19,6 +18,10 @@ public final class GboardAdvancedVoiceStockPolicyTest {
                     GboardAdvancedVoiceStockPolicy.maybeForceStockFlag(
                             flag, Boolean.FALSE));
         }
+        Assert.assertSame(Boolean.FALSE,
+                GboardAdvancedVoiceStockPolicy.maybeForceStockFlag(
+                        GboardAdvancedVoiceStockPolicy.ENABLE_DICTATION_SPLIT_INSTALL_FLAG,
+                        Boolean.FALSE));
         Object wrongType = "false";
         Assert.assertSame(wrongType,
                 GboardAdvancedVoiceStockPolicy.maybeForceStockFlag(

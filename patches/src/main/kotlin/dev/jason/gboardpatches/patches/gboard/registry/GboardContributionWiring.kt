@@ -6,6 +6,7 @@ import dev.jason.gboardpatches.patches.gboard.features.accesspointsmenu.gboardAc
 import dev.jason.gboardpatches.patches.gboard.features.accesspointsmenu.gboardAccessPointsMenuFlagValuePatch
 import dev.jason.gboardpatches.patches.gboard.features.cursortrackpad.gboardCursorTrackpadFlagValuePatch
 import dev.jason.gboardpatches.patches.gboard.features.cursortrackpad.gboardCursorTrackpadPreferencePatch
+import dev.jason.gboardpatches.patches.gboard.features.cursortrackpad.gboardSmoothBackspaceSwipePatch
 import dev.jason.gboardpatches.patches.gboard.features.writingtools.gboardAiWritingToolsFlagValuePatch
 import dev.jason.gboardpatches.patches.gboard.features.writingtools.gboardAiWritingTools1853PreferenceObserverPatch
 import dev.jason.gboardpatches.patches.gboard.features.addsymbols.gboardZhuyinCustomSymbolsCorpusPatch
@@ -16,6 +17,7 @@ import dev.jason.gboardpatches.patches.gboard.features.addsymbols.gboardZhuyinCu
 import dev.jason.gboardpatches.patches.gboard.features.addsymbols.gboardZhuyinCustomSymbolsRoutingPatch
 import dev.jason.gboardpatches.patches.gboard.features.advancedvoice.gboardAdvancedVoice1803ZhTwPatch
 import dev.jason.gboardpatches.patches.gboard.features.advancedvoice.gboardAdvancedVoiceFlagValuePatch
+import dev.jason.gboardpatches.patches.gboard.features.advancedvoice.gboardAdvancedVoiceLanguageDownloadGuardPatch
 import dev.jason.gboardpatches.patches.gboard.features.englishqwerty.gboardEnglishQwertyPointerPatch
 import dev.jason.gboardpatches.patches.gboard.features.englishqwerty.gboardEnglishQwertySoftKeyPatch
 import dev.jason.gboardpatches.patches.gboard.features.longpressquickactions.gboardLongPressQuickActionsInputEventPatch
@@ -55,7 +57,12 @@ internal object GboardContributionWiring {
         ),
         "enable_cursor_trackpad_mode" to listOf(
             unit("enable_cursor_trackpad_mode.flag") { arrayOf(gboardCursorTrackpadFlagValuePatch) },
-            unit("enable_cursor_trackpad_mode.preferences") { arrayOf(gboardCursorTrackpadPreferencePatch) },
+            unit("enable_cursor_trackpad_mode.preferences") {
+                arrayOf(
+                    gboardCursorTrackpadPreferencePatch,
+                    gboardSmoothBackspaceSwipePatch,
+                )
+            },
         ),
         "advanced_voice_typing" to listOf(
             unit("advanced_voice_typing.flag") {
@@ -64,6 +71,7 @@ internal object GboardContributionWiring {
             unit("advanced_voice_typing.bytecode") {
                 arrayOf(
                     gboardAdvancedVoice1803ZhTwPatch,
+                    gboardAdvancedVoiceLanguageDownloadGuardPatch,
                     gboardRambler1803OfficialSelectorPatch,
                 )
             },

@@ -132,6 +132,7 @@ local.properties
 
 # Local patch/build inspection artifacts
 .validation/
+patches/src/main/resources/private-fonts/
 
 # Local Python caches
 __pycache__/

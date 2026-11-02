@@ -448,6 +448,21 @@ final class GboardCustomThemeGalleryView {
     }
 
     private void apply(GboardCustomThemeCatalog.Theme theme) {
+        if (GboardCustomThemeSettings.followsSystem(
+                GboardPatchesSettings.preferences(context))) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Assign " + theme.name)
+                    .setItems(new String[] {"Use as light theme", "Use as dark theme",
+                                    "Apply once"},
+                            (dialog, which) -> apply(theme, which == 0 ? 1 : which == 1 ? 2 : 0))
+                    .setNegativeButton(text(R.string.gboard_patches_dialog_cancel), null)
+                    .show();
+            return;
+        }
+        apply(theme, 0);
+    }
+
+    private void apply(GboardCustomThemeCatalog.Theme theme, int systemSlot) {
         if (closed || !busy.compareAndSet(false, true)) return;
         if (!GboardCustomThemeSettings.readEnabled(GboardPatchesSettings.preferences(context))) {
             busy.set(false);
@@ -468,8 +483,15 @@ final class GboardCustomThemeGalleryView {
                 File inner = GboardCustomThemeRepository.extractTheme(context, pack, theme,
                         (done, total) -> postSafely(
                                 () -> updateDownloadProgress(pack, done, total)));
-                GboardCustomThemeInstaller.install(context, inner, theme.preferKeyBorder);
-                postSafely(() -> handleCommittedInstall(theme.name));
+                if (systemSlot == 0) {
+                    GboardCustomThemeInstaller.install(context, inner, theme.preferKeyBorder);
+                } else {
+                    GboardCustomThemeInstaller.importForSystemSlot(context, inner,
+                            systemSlot == 2, theme.name, theme.preferKeyBorder);
+                }
+                String resultName = systemSlot == 1 ? theme.name + " (light)"
+                        : systemSlot == 2 ? theme.name + " (dark)" : theme.name;
+                postSafely(() -> handleCommittedInstall(resultName));
             } catch (Throwable failure) {
                 postSafely(() -> {
                     if (closed) return;

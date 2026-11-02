@@ -27,12 +27,55 @@ public final class GboardAdvancedVoiceRuntime {
     private static final AtomicBoolean ZH_TW_MDD_REQUESTED = new AtomicBoolean(false);
     private static final AtomicInteger INFO_LOG_COUNT = new AtomicInteger();
     private static final AtomicInteger ERROR_LOG_COUNT = new AtomicInteger();
+    private static final long LANGUAGE_DOWNLOAD_COOLDOWN_NANOS =
+            30L * 60L * 1_000_000_000L;
+    private static final ConcurrentHashMap<String, Long> LAST_LANGUAGE_DOWNLOAD_NANOS =
+            new ConcurrentHashMap<String, Long>();
     private static final ConcurrentHashMap<Class<?>, Field> FLAG_NAME_FIELDS =
             new ConcurrentHashMap<Class<?>, Field>();
     private static final Map<ClassLoader, WeakReference<Handles>> HANDLES_BY_LOADER =
             new WeakHashMap<ClassLoader, WeakReference<Handles>>();
 
     private GboardAdvancedVoiceRuntime() {
+    }
+
+    /**
+     * Prevents Gboard's language download queue from immediately rescheduling a
+     * request that it just reported as successful.  The stock 18.5.4 queue can
+     * enter a tight loop when Advanced Voice is enabled but the downloaded
+     * model is still reported unavailable.
+     */
+    public static boolean allowLanguageDownload(String languageTag) {
+        if (!GboardAdvancedVoiceRuntimeSettings.isEnabled()) {
+            return true;
+        }
+        return allowLanguageDownloadAt(languageTag, System.nanoTime());
+    }
+
+    static boolean allowLanguageDownloadAt(String languageTag, long nowNanos) {
+        if (languageTag == null || languageTag.length() == 0) {
+            return true;
+        }
+        for (;;) {
+            Long previous = LAST_LANGUAGE_DOWNLOAD_NANOS.get(languageTag);
+            if (previous == null) {
+                if (LAST_LANGUAGE_DOWNLOAD_NANOS.putIfAbsent(languageTag, nowNanos) == null) {
+                    return true;
+                }
+                continue;
+            }
+            long elapsed = nowNanos - previous.longValue();
+            if (elapsed >= 0L && elapsed < LANGUAGE_DOWNLOAD_COOLDOWN_NANOS) {
+                return false;
+            }
+            if (LAST_LANGUAGE_DOWNLOAD_NANOS.replace(languageTag, previous, nowNanos)) {
+                return true;
+            }
+        }
+    }
+
+    static void resetLanguageDownloadGuardForTest() {
+        LAST_LANGUAGE_DOWNLOAD_NANOS.clear();
     }
 
     public static void seedApplicationContext(Context context) {

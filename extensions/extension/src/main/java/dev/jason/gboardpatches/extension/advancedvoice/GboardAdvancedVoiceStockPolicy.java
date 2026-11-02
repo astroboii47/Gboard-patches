@@ -23,7 +23,10 @@ public final class GboardAdvancedVoiceStockPolicy {
             new HashSet<String>(Arrays.asList(
                     ENABLE_NGA_FLAG,
                     ENABLE_ADVANCED_FEATURES_FLAG,
-                    ENABLE_DICTATION_SPLIT_INSTALL_FLAG,
+                    // Morphe fuses dictation_jni into the base APK. Forcing the
+                    // Play feature-split installer here makes Gboard repeatedly
+                    // request an en-AU model/split that can never materialize as
+                    // a separate installed split, consuming a full CPU core.
                     HANDLE_FALLBACK_INSIDE_SD_STACK_FLAG,
                     ENABLE_STICKY_MIC_BACKGROUND_FLAG,
                     ENABLE_SODA_LONGFORM_EXPERIMENT_FLAG)));

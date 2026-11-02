@@ -20,7 +20,8 @@ internal val gboardCustomThemeOfficialImportPatch = bytecodePatch(
     description = "在 Gboard 官方 Theme 加號加入 ZIP 主題匯入選項。",
 ) {
     compatibleWith(COMPATIBILITY_GBOARD)
-    dependsOn(gboardPatchesExtensionCarrierPatch)
+    dependsOn(gboardPatchesExtensionCarrierPatch, gboardCustomThemeAccentPatch,
+        gboardStockThemeColorsPatch)
 
     execute {
         val (plusHandler, resultHandler) = validateCustomThemeTargetContract()

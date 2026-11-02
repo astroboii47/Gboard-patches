@@ -10,7 +10,7 @@ public final class GboardCursorTrackpadPolicyTest {
                 "free_cursor", Boolean.FALSE, true));
         Assert.assertEquals(Boolean.TRUE, GboardCursorTrackpadPolicy.maybeForceFlag(
                 "free_cursor_lock_mode", Boolean.FALSE, true));
-        Assert.assertEquals(Double.valueOf(0.0d), GboardCursorTrackpadPolicy.maybeForceFlag(
+        Assert.assertEquals(Double.valueOf(50.0d), GboardCursorTrackpadPolicy.maybeForceFlag(
                 "free_cursor_lock_detection_countdown_millisec", Double.valueOf(2000.0d), true));
     }
 

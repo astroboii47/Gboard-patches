@@ -9,6 +9,19 @@ public class GboardAdvancedVoiceRuntimeTest {
     @After public void clean() {
         GboardAdvancedVoiceRuntimeSettings.clearEnabledOverrideForTest();
         GboardAdvancedVoiceRuntime.resetMddRequest();
+        GboardAdvancedVoiceRuntime.resetLanguageDownloadGuardForTest();
+    }
+    @Test public void repeatedLanguageDownloadIsSuppressedForThirtyMinutes() {
+        long minute = 60L * 1_000_000_000L;
+        assertTrue(GboardAdvancedVoiceRuntime.allowLanguageDownloadAt("en-AU", minute));
+        assertFalse(GboardAdvancedVoiceRuntime.allowLanguageDownloadAt("en-AU", 2L * minute));
+        assertTrue(GboardAdvancedVoiceRuntime.allowLanguageDownloadAt("fr-FR", 2L * minute));
+        assertTrue(GboardAdvancedVoiceRuntime.allowLanguageDownloadAt("en-AU", 31L * minute));
+    }
+    @Test public void downloadGuardDoesNotAlterStockWhenAdvancedVoiceIsOff() {
+        GboardAdvancedVoiceRuntimeSettings.setEnabledOverrideForTest(false);
+        assertTrue(GboardAdvancedVoiceRuntime.allowLanguageDownload("en-AU"));
+        assertTrue(GboardAdvancedVoiceRuntime.allowLanguageDownload("en-AU"));
     }
     @Test public void nativeLoaderIsConsultedOnlyWhenMasterOnAndStockNotReady() {
         GboardAdvancedVoiceRuntimeSettings.setEnabledOverrideForTest(false);

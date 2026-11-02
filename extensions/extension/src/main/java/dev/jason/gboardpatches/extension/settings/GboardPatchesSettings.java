@@ -71,6 +71,17 @@ public final class GboardPatchesSettings {
         }
     }
 
+    /** Centralized string write for new settings, guarded against unavailable CE storage. */
+    public static boolean writeStringSetting(Context context, String key, String value) {
+        if (key == null || key.isEmpty() || value == null) return false;
+        try {
+            SharedPreferences preferences = preferencesOrNull(context);
+            return preferences != null && preferences.edit().putString(key, value).commit();
+        } catch (RuntimeException unavailable) {
+            return false;
+        }
+    }
+
     public static void ensureDefaults(SharedPreferences preferences) {
         if (preferences == null) {
             return;

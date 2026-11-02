@@ -14,6 +14,7 @@ import java.util.Map;
 
 import dev.jason.gboardpatches.extension.symbolfooter.GboardSymbolFooterOrderSettings;
 import dev.jason.gboardpatches.extension.toprowswipe.GboardTopRowSwipeSettings;
+import dev.jason.gboardpatches.extension.customtheme.GboardCustomThemeAutoSwitcher;
 
 public final class GboardPatchesSettingsProvider extends ContentProvider {
     private static final String TAG = "GboardPatches";
@@ -32,6 +33,11 @@ public final class GboardPatchesSettingsProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
+        try {
+            GboardCustomThemeAutoSwitcher.register(getContext());
+        } catch (Throwable ignored) {
+            // Optional theme automation must never prevent Gboard process startup.
+        }
         return true;
     }
 

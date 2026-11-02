@@ -7,6 +7,7 @@ import java.util.List;
 
 import dev.jason.gboardpatches.extension.R;
 import dev.jason.gboardpatches.extension.accessibilitylayout.GboardAccessibilityLayoutSettingsFeature;
+import dev.jason.gboardpatches.extension.backspaceswipe.GboardBackspaceSwipeSettingsFeature;
 import dev.jason.gboardpatches.extension.accesspointcount.GboardAccessPointCountSettingsFeature;
 import dev.jason.gboardpatches.extension.accesspointsmenu.GboardAccessPointsMenuSettingsFeature;
 import dev.jason.gboardpatches.extension.closeproactivesuggestions.GboardCloseProactiveSuggestionsSettingsFeature;
@@ -43,6 +44,7 @@ public final class GboardKeyboardLayoutSettingsGroupFeature
                         R.string.gboard_patches_group_keyboard_empty_summary),
                 Arrays.asList(
                         new GboardSpacebarLogoSettingsFeature(context),
+                        new GboardBackspaceSwipeSettingsFeature(),
                         new GboardCloseProactiveSuggestionsSettingsFeature(context),
                         new GboardLatinGlobeKeyIgnoreIntervalSettingsFeature(context),
                         new GboardEnglishUppercaseToggleSettingsFeature(context),

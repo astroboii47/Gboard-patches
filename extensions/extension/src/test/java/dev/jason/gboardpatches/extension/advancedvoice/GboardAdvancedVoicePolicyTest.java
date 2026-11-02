@@ -12,14 +12,13 @@ public final class GboardAdvancedVoicePolicyTest {
                     + "GboardAdvancedVoicePolicy";
 
     @Test
-    public void forcesOnlyTheSixAdvancedVoiceBooleanFlags() throws Exception {
+    public void forcesAdvancedVoiceFlagsButNotFeatureSplitInstaller() throws Exception {
         Method maybeForceFlag = policyMethod(
                 "maybeForceFlag", String.class, Object.class);
 
         String[] forcedFlags = {
                 "enable_nga",
                 "enable_advanced_features_in_consolidated_sd_stack",
-                "enable_dictation_feature_split_install",
                 "handle_fallback_inside_sd_stack",
                 "enable_sticky_mic_background",
                 "enable_soda_longform_experiment"
@@ -32,6 +31,10 @@ public final class GboardAdvancedVoicePolicyTest {
             Assert.assertEquals("not-a-boolean",
                     maybeForceFlag.invoke(null, flagName, "not-a-boolean"));
         }
+
+        Assert.assertEquals(Boolean.FALSE,
+                maybeForceFlag.invoke(null,
+                        "enable_dictation_feature_split_install", Boolean.FALSE));
 
         Assert.assertEquals(Boolean.FALSE,
                 maybeForceFlag.invoke(null, "unrelated", Boolean.FALSE));

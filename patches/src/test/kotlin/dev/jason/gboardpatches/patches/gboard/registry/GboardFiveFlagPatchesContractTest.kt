@@ -8,6 +8,7 @@ import dev.jason.gboardpatches.patches.gboard.features.accesspointsmenu.gboardAc
 import dev.jason.gboardpatches.patches.gboard.features.cursortrackpad.gboardCursorTrackpadFeatureMarkerPatch
 import dev.jason.gboardpatches.patches.gboard.features.cursortrackpad.gboardCursorTrackpadFlagValuePatch
 import dev.jason.gboardpatches.patches.gboard.features.cursortrackpad.gboardCursorTrackpadPreferencePatch
+import dev.jason.gboardpatches.patches.gboard.features.cursortrackpad.gboardSmoothBackspaceSwipePatch
 import dev.jason.gboardpatches.patches.gboard.features.emojisize.gboardEmojiSizeFeatureMarkerPatch
 import dev.jason.gboardpatches.patches.gboard.features.emojisize.gboardEmojiSizeFlagValuePatch
 import dev.jason.gboardpatches.patches.gboard.features.splitkeyboard.gboardSplitKeyboardFeatureMarkerPatch
@@ -34,6 +35,7 @@ class GboardFiveFlagPatchesContractTest {
                 gboardCursorTrackpadFeatureMarkerPatch,
                 gboardCursorTrackpadFlagValuePatch,
                 gboardCursorTrackpadPreferencePatch,
+                gboardSmoothBackspaceSwipePatch,
             ),
             gboardAccessPointsMenuStylePatch to listOf(
                 gboardPatchesSettingsPatch,

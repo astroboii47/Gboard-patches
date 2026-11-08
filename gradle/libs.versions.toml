@@ -12,3 +12,6 @@ gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 apache-ftpserver-core = { group = "org.apache.ftpserver", name = "ftpserver-core", version.ref = "ftpserver" }
 apache-mina-core = { group = "org.apache.mina", name = "mina-core", version.ref = "apache-mina" }
 hidden-api-bypass = { module = "org.lsposed.hiddenapibypass:hiddenapibypass", version.ref = "hidden-api-bypass" }
+# Gradle plugins adds the dependency during build, this declaration is here only for dependabot to provide updates.
+#noinspection UnusedVersionCatalogEntry
+morphe-patcher = { module = "app.morphe:morphe-patcher", version.ref = "morphe-patcher" }

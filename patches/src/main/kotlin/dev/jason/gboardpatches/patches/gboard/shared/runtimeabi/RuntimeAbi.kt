@@ -89,7 +89,6 @@ internal enum class RuntimeCallId(internal val encodedAbi: String) {
     BACKSPACE_SWIPE_RUNTIME_HANDLE_CHARACTER_STEP("Ldev/jason/gboardpatches/extension/backspaceswipe/GboardBackspaceSwipeRuntime;->handleCharacterStep(Ljava/lang/Object;I)Z"),
     CUSTOM_THEME_RUNTIME_OVERRIDE_ACTION_KEY_COLOR("Ldev/jason/gboardpatches/extension/customtheme/GboardCustomThemeAccentRuntime;->overrideActionKeyColor(Ljava/lang/Object;Ljava/lang/String;Landroid/content/res/ColorStateList;)Landroid/content/res/ColorStateList;"),
     STOCK_THEME_COLORS_RUNTIME_ATTACH("Ldev/jason/gboardpatches/extension/stockthemecolors/GboardStockThemeColorsRuntime;->attach(Ljava/lang/Object;)V"),
-    STOCK_THEME_COLORS_RUNTIME_ATTACH_PAGE("Ldev/jason/gboardpatches/extension/stockthemecolors/GboardStockThemeColorsRuntime;->attachPage(Landroid/view/View;Ljava/lang/Object;)V"),
     STOCK_THEME_COLORS_RUNTIME_ATTACH_ACTIVITY("Ldev/jason/gboardpatches/extension/stockthemecolors/GboardStockThemeColorsRuntime;->attachActivity(Ljava/lang/Object;)V"),
     STOCK_THEME_COLORS_RUNTIME_PREPARE_SAVE("Ldev/jason/gboardpatches/extension/stockthemecolors/GboardStockThemeColorsRuntime;->prepareSave(Ljava/lang/Object;)V"),
     STOCK_THEME_COLORS_RUNTIME_POST_PROCESS("Ldev/jason/gboardpatches/extension/stockthemecolors/GboardStockThemeColorsRuntime;->postProcess(Ljava/lang/Object;Ljava/io/File;Z)Z"),

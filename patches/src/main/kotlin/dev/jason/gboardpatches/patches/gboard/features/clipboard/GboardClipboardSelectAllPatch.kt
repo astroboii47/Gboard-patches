@@ -1,8 +1,10 @@
 package dev.jason.gboardpatches.patches.gboard.features.clipboard
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.patch.BytecodePatchContext
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.util.smali.ExternalLabel
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -42,15 +44,28 @@ internal val gboardClipboardSelectAllPatch = bytecodePatch(
             after = call(RuntimeCallId.CLIPBOARD_SELECT_ALL_AFTER_STATE, "p0 .. p1"))
         wrapClipboardSelectAll(GboardVersionBindings.clipboardSelectAllData, "Data",
             after = call(RuntimeCallId.CLIPBOARD_SELECT_ALL_AFTER_DATA, "p0 .. p0"))
-        wrapClipboardSelectAll(GboardVersionBindings.clipboardSelectAllTouch, "Touch",
-            before = """
-                ${call(RuntimeCallId.CLIPBOARD_SELECT_ALL_INTERCEPT_TOUCH, "p0 .. p1")}
-                move-result v0
-                if-eqz v0, :stock
-                return v0
-                :stock
-            """.trimIndent())
+        installClipboardSelectAllTouchHook()
     }
+}
+
+/**
+ * Injects into the stock touch method instead of moving its implementation into a helper.
+ * Keeping the original instruction objects in place prevents branch targets from becoming
+ * stale when this bundle is combined with another bundle that also edits SoftKeyboardView.
+ */
+private fun BytecodePatchContext.installClipboardSelectAllTouchHook() {
+    val target = GboardVersionBindings.clipboardSelectAllTouch.resolve(this)
+    val continuation = target.requireInstanceImplementation().instructions.first()
+    target.addInstructionsWithLabels(
+        0,
+        """
+            ${call(RuntimeCallId.CLIPBOARD_SELECT_ALL_INTERCEPT_TOUCH, "p0 .. p1")}
+            move-result v0
+            if-eqz v0, :jasondev_clipboard_touch_stock
+            return v0
+        """.trimIndent(),
+        ExternalLabel("jasondev_clipboard_touch_stock", continuation),
+    )
 }
 
 /** Keeps the layout callback and select-all lifecycle in the same wrapper. */

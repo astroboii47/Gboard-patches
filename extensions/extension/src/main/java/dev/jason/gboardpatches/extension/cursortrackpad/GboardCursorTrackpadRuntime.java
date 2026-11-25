@@ -54,7 +54,10 @@ public final class GboardCursorTrackpadRuntime {
         try {
             if (!(GboardCursorTrackpadPolicy.FREE_CURSOR_FLAG.equals(flagName)
                     || GboardCursorTrackpadPolicy.FREE_CURSOR_LOCK_MODE_FLAG.equals(flagName)
-                    || GboardCursorTrackpadPolicy.FREE_CURSOR_LOCK_COUNTDOWN_FLAG.equals(flagName))) {
+                    || GboardCursorTrackpadPolicy.FREE_CURSOR_LOCK_COUNTDOWN_FLAG.equals(flagName)
+                    || GboardCursorTrackpadPolicy.FREE_CURSOR_HORIZONTAL_FIRST_STEP_FLAG.equals(flagName)
+                    || GboardCursorTrackpadPolicy.FREE_CURSOR_HORIZONTAL_STEP_FLAG.equals(flagName)
+                    || GboardCursorTrackpadPolicy.FREE_CURSOR_MAX_SPEED_FACTOR_FLAG.equals(flagName))) {
                 return stockResult;
             }
             SharedPreferences preferences = GboardFlagRuntimeContext.preferencesOrNull();

@@ -168,6 +168,8 @@ final class GboardSettingsSearchIndexData {
             {14, R.string.gboard_patches_floating_web_search_test_title, R.string.gboard_patches_floating_web_search_test_summary, 0},
             {15, R.string.gboard_patches_calculator_title, R.string.gboard_patches_calculator_summary, 1},
             {15, R.string.gboard_patches_calculator_enable_title, R.string.gboard_patches_calculator_enable_summary, 0},
+            {15, R.string.gboard_patches_shortcodes_enable_title, R.string.gboard_patches_shortcodes_enable_summary, 0},
+            {15, R.string.gboard_patches_shortcodes_vertical_title, R.string.gboard_patches_shortcodes_vertical_summary, 0},
             {16, R.string.gboard_patches_swipe_dismiss_title, R.string.gboard_patches_swipe_dismiss_summary, 1},
             {16, R.string.gboard_patches_swipe_dismiss_enabled_title, R.string.gboard_patches_swipe_dismiss_enabled_summary, 0},
             {17, R.string.gboard_patches_keypress_haptics_title, R.string.gboard_patches_keypress_haptics_entry_summary, 1},

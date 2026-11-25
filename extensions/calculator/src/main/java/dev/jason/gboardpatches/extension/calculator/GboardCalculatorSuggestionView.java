@@ -37,7 +37,11 @@ final class GboardCalculatorSuggestionView {
         int keyboardTop = findKeyboardPanelTop(
                 host, host, hostLocation[1], Integer.MAX_VALUE, 0);
         if (keyboardTop == Integer.MAX_VALUE) {
-            return null;
+            // Some Gboard layouts expose the input view itself as the keyboard host
+            // without a separately detectable full-width panel. The host is already
+            // fingerprinted as a FrameLayout subclass, so its top is the safe fallback.
+            return host.getHeight() >= dp(host.getContext(), 160)
+                    ? new Placement(host, dp(host.getContext(), 4)) : null;
         }
         int topMargin = Math.max(0,
                 keyboardTop - hostLocation[1] + dp(host.getContext(), 4));
@@ -215,6 +219,8 @@ final class GboardCalculatorSuggestionView {
         FrameLayout host() {
             return host;
         }
+
+        int topMargin() { return topMargin; }
     }
 
     static final class Handle {

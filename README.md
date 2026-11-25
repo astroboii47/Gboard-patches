@@ -5,10 +5,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/jasonwu1994/Gboard-patches/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/jasonwu1994/Gboard-patches?display_name=tag&label=Release&style=for-the-badge"></a>
-  <a href="https://github.com/jasonwu1994/Gboard-patches"><img alt="Total downloads" src="https://img.shields.io/github/downloads/jasonwu1994/Gboard-patches/total?label=Downloads&style=for-the-badge"></a>
-  <a href="https://morphe.software/add-source?github=jasonwu1994/Gboard-patches"><img alt="Add to Morphe" src="https://img.shields.io/badge/Morphe-Add%20Source-00A8FF?style=for-the-badge"></a>
-  <a href="https://github.com/jasonwu1994/Gboard-patches"><img alt="GitHub stars" src="https://img.shields.io/github/stars/jasonwu1994/Gboard-patches?style=social"></a>
+  <a href="https://github.com/astroboii47/Gboard-patches/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/astroboii47/Gboard-patches?display_name=tag&label=Release&style=for-the-badge"></a>
+  <a href="https://morphe.software/add-source?github=astroboii47/Gboard-patches"><img alt="Add to Morphe" src="https://img.shields.io/badge/Morphe-Add%20Source-00A8FF?style=for-the-badge"></a>
 </p>
 
 <p align="center">
@@ -316,8 +314,12 @@ Features tailored to Traditional Chinese and Zhuyin input workflows.
 
 Add this repository as a Morphe source:
 
-- [Open in Morphe](https://morphe.software/add-source?github=jasonwu1994/Gboard-patches)
-- Or manually add `https://github.com/jasonwu1994/Gboard-patches`
+- [Open in Morphe](https://morphe.software/add-source?github=astroboii47/Gboard-patches)
+- Or manually add `https://github.com/astroboii47/Gboard-patches`
+
+### Use with GinType
+
+This bundle is designed to coexist with [GinType](https://github.com/srwi/GinType). Add both repositories as Morphe sources and select patches from both. Enable **Package Rename** in this bundle and disable GinType's **Package Rename** patch. Applying two package-rename patches can produce conflicting package names and break updates over an existing installation.
 
 ## Build
 

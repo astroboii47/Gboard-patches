@@ -17,6 +17,8 @@ public final class GboardBackspaceSwipeRuntime {
     private static final String TAG = "GboardSmoothDelete";
     private static final Map<Object, float[]> ORIGINAL_THRESHOLDS =
             Collections.synchronizedMap(new WeakHashMap<>());
+    private static final float CHARACTER_STEP_DP = 10.0f;
+    private static volatile Field repeatedStepField;
 
     private GboardBackspaceSwipeRuntime() { }
 
@@ -36,8 +38,17 @@ public final class GboardBackspaceSwipeRuntime {
             }
             Context context = context(handler);
             float density = context == null ? 1f : context.getResources().getDisplayMetrics().density;
-            float stepDp = mode == GboardBackspaceSwipeSettings.CHARACTERS ? 6f : 40f;
+            float stepDp = mode == GboardBackspaceSwipeSettings.CHARACTERS
+                    ? CHARACTER_STEP_DP : 40f;
             thresholds.set(config, new float[] { stepDp * density });
+            if (mode == GboardBackspaceSwipeSettings.CHARACTERS) {
+                Field repeated = repeatedStepField;
+                if (repeated == null) {
+                    repeated = findField(handler.getClass(), "a");
+                    repeatedStepField = repeated;
+                }
+                repeated.setInt(handler, Math.max(1, Math.round(CHARACTER_STEP_DP * density)));
+            }
         } catch (Throwable failure) {
             Log.w(TAG, "configure failed", failure);
         }
@@ -111,6 +122,17 @@ public final class GboardBackspaceSwipeRuntime {
             } catch (NoSuchFieldException ignored) { type = type.getSuperclass(); }
         }
         return null;
+    }
+
+    private static Field findField(Class<?> type, String name) throws Exception {
+        while (type != null) {
+            try {
+                Field field = type.getDeclaredField(name);
+                field.setAccessible(true);
+                return field;
+            } catch (NoSuchFieldException ignored) { type = type.getSuperclass(); }
+        }
+        throw new NoSuchFieldException(name);
     }
 
     private static int intField(Object owner, String name) throws Exception {

@@ -20,6 +20,12 @@ public final class GboardCalculatorSettingsFeature
     private final String headerBadge;
     private final String enableTitle;
     private final String enableSummary;
+    private final String shortcodesTitle;
+    private final String shortcodesSummary;
+    private final String verticalTitle;
+    private final String verticalSummary;
+    private final String gifQueryTitle;
+    private final String gifQuerySummary;
     private final String sectionFeature;
     private final String sectionUsage;
     private final String usageTitle;
@@ -35,6 +41,12 @@ public final class GboardCalculatorSettingsFeature
         headerBadge = text(context, R.string.gboard_patches_header_badge);
         enableTitle = text(context, R.string.gboard_patches_calculator_enable_title);
         enableSummary = text(context, R.string.gboard_patches_calculator_enable_summary);
+        shortcodesTitle = text(context, R.string.gboard_patches_shortcodes_enable_title);
+        shortcodesSummary = text(context, R.string.gboard_patches_shortcodes_enable_summary);
+        verticalTitle = text(context, R.string.gboard_patches_shortcodes_vertical_title);
+        verticalSummary = text(context, R.string.gboard_patches_shortcodes_vertical_summary);
+        gifQueryTitle = text(context, R.string.gboard_patches_gif_query_title);
+        gifQuerySummary = text(context, R.string.gboard_patches_gif_query_summary);
         sectionFeature = text(context, R.string.gboard_patches_calculator_section_feature);
         sectionUsage = text(context, R.string.gboard_patches_calculator_section_usage);
         usageTitle = text(context, R.string.gboard_patches_calculator_usage_title);
@@ -70,9 +82,14 @@ public final class GboardCalculatorSettingsFeature
             }
             Context context = host.getContext();
             boolean enabled = GboardCalculatorSettings.readEnabled(context);
-            return buildScreenForState(
-                    enabled,
-                    value -> GboardCalculatorSettings.writeEnabled(context, value));
+            boolean shortcodesEnabled = GboardCalculatorSettings.readShortcodesEnabled(context);
+            boolean shortcodesVertical = GboardCalculatorSettings.readShortcodesVertical(context);
+            boolean gifQueryEnabled = GboardCalculatorSettings.readGifQueryShortcutEnabled(context);
+            return buildScreenForState(enabled, shortcodesEnabled, shortcodesVertical, gifQueryEnabled,
+                    value -> GboardCalculatorSettings.writeEnabled(context, value),
+                    value -> GboardCalculatorSettings.writeShortcodesEnabled(context, value),
+                    value -> GboardCalculatorSettings.writeShortcodesVertical(context, value),
+                    value -> GboardCalculatorSettings.writeGifQueryShortcutEnabled(context, value));
         } catch (Throwable throwable) {
             Log.w(TAG, "Failed to render calculator settings", throwable);
             return errorScreen();
@@ -81,6 +98,27 @@ public final class GboardCalculatorSettingsFeature
 
     GboardPatchesSettingsContract.Screen buildScreenForState(boolean enabled,
             GboardPatchesSettingsContract.ToggleAction toggleAction) {
+        return buildScreenForState(enabled, true, true, toggleAction, value -> { }, value -> { });
+    }
+
+    GboardPatchesSettingsContract.Screen buildScreenForState(boolean enabled,
+            boolean shortcodesEnabled,
+            boolean shortcodesVertical,
+            GboardPatchesSettingsContract.ToggleAction toggleAction,
+            GboardPatchesSettingsContract.ToggleAction shortcodesToggleAction,
+            GboardPatchesSettingsContract.ToggleAction verticalToggleAction) {
+        return buildScreenForState(enabled, shortcodesEnabled, shortcodesVertical, true,
+                toggleAction, shortcodesToggleAction, verticalToggleAction, value -> { });
+    }
+
+    GboardPatchesSettingsContract.Screen buildScreenForState(boolean enabled,
+            boolean shortcodesEnabled,
+            boolean shortcodesVertical,
+            boolean gifQueryEnabled,
+            GboardPatchesSettingsContract.ToggleAction toggleAction,
+            GboardPatchesSettingsContract.ToggleAction shortcodesToggleAction,
+            GboardPatchesSettingsContract.ToggleAction verticalToggleAction,
+            GboardPatchesSettingsContract.ToggleAction gifQueryToggleAction) {
         return new GboardPatchesSettingsContract.Screen(
                 title,
                 headerBadge,
@@ -90,13 +128,31 @@ public final class GboardCalculatorSettingsFeature
                 Arrays.asList(
                         new GboardPatchesSettingsContract.Section(
                                 sectionFeature,
-                                Collections.singletonList(
+                                Arrays.asList(
                                         new GboardPatchesSettingsContract.ToggleRow(
                                                 enableTitle,
                                                 enableSummary,
                                                 true,
                                                 enabled,
-                                                toggleAction))),
+                                                toggleAction),
+                                        new GboardPatchesSettingsContract.ToggleRow(
+                                                shortcodesTitle,
+                                                shortcodesSummary,
+                                                true,
+                                                shortcodesEnabled,
+                                                shortcodesToggleAction),
+                                        new GboardPatchesSettingsContract.ToggleRow(
+                                                verticalTitle,
+                                                verticalSummary,
+                                                shortcodesEnabled,
+                                                shortcodesVertical,
+                                                verticalToggleAction),
+                                        new GboardPatchesSettingsContract.ToggleRow(
+                                                gifQueryTitle,
+                                                gifQuerySummary,
+                                                true,
+                                                gifQueryEnabled,
+                                                gifQueryToggleAction))),
                         new GboardPatchesSettingsContract.Section(
                                 sectionUsage,
                                 Arrays.asList(

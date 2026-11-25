@@ -132,7 +132,12 @@ local.properties
 
 # Local patch/build inspection artifacts
 .validation/
+local-artifacts/
 patches/src/main/resources/private-fonts/
+
+# Finder metadata
+.DS_Store
+**/.DS_Store
 
 # Local Python caches
 __pycache__/

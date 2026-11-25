@@ -12,6 +12,12 @@ public final class GboardCursorTrackpadPolicyTest {
                 "free_cursor_lock_mode", Boolean.FALSE, true));
         Assert.assertEquals(Double.valueOf(50.0d), GboardCursorTrackpadPolicy.maybeForceFlag(
                 "free_cursor_lock_detection_countdown_millisec", Double.valueOf(2000.0d), true));
+        Assert.assertEquals(Double.valueOf(1.8d), GboardCursorTrackpadPolicy.maybeForceFlag(
+                "free_cursor_horizontal_distance_mm_for_first_step", Double.valueOf(1.4d), true));
+        Assert.assertEquals(Double.valueOf(1.8d), GboardCursorTrackpadPolicy.maybeForceFlag(
+                "free_cursor_horizontal_distance_mm_per_step", Double.valueOf(1.4d), true));
+        Assert.assertEquals(Double.valueOf(2.0d), GboardCursorTrackpadPolicy.maybeForceFlag(
+                "free_cursor_advanced_max_speed_factor", Double.valueOf(3.0d), true));
     }
 
     @Test

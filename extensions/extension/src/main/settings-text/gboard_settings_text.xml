@@ -3092,6 +3092,30 @@
         <translation locale="en">Unable to completely decode this flag store, so it cannot be used.</translation>
         <translation locale="zh-Hant">無法完整解碼這份 flag store，因此無法使用。</translation>
     </string>
+    <string name="gboard_patches_shortcodes_enable_title">
+        <translation locale="en">Emoji &amp; symbol shortcodes</translation>
+        <translation locale="zh-Hant">表情符號與符號短碼</translation>
+    </string>
+    <string name="gboard_patches_shortcodes_enable_summary">
+        <translation locale="en">Type :smile: to insert an emoji, or tap a matching suggestion while typing.</translation>
+        <translation locale="zh-Hant">輸入 :smile: 等短碼以插入表情符號；輸入時會顯示可點選建議。</translation>
+    </string>
+    <string name="gboard_patches_shortcodes_vertical_title">
+        <translation locale="en">Vertical shortcode popup</translation>
+        <translation locale="zh-Hant">垂直短碼彈出清單</translation>
+    </string>
+    <string name="gboard_patches_shortcodes_vertical_summary">
+        <translation locale="en">Show a Pastiera-style vertical list above the keyboard. Turn off for the horizontal strip.</translation>
+        <translation locale="zh-Hant">在鍵盤上方顯示 Pastiera 風格的垂直清單；關閉則使用水平列。</translation>
+    </string>
+    <string name="gboard_patches_gif_query_title">
+        <translation locale="en">Quick GIF search</translation>
+        <translation locale="zh-Hant">快速 GIF 搜尋</translation>
+    </string>
+    <string name="gboard_patches_gif_query_summary">
+        <translation locale="en">Type ?sad face? to open Gboard GIF search for sad face.</translation>
+        <translation locale="zh-Hant">輸入 ?sad face?，直接在 Gboard GIF 搜尋 sad face。</translation>
+    </string>
     <string name="gboard_patches_calculator_title">
         <translation locale="en">Simple Calculator</translation>
         <translation locale="zh-Hant">簡易計算機</translation>

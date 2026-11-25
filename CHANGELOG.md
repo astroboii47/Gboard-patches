@@ -1,3 +1,191 @@
+## [4.5.0-dev.7](https://github.com/jasonwu1994/Gboard-patches/compare/v4.5.0-dev.4...v4.5.0-dev.7) (2026-11-25)
+
+### ✨ New Features
+
+* **Gboard:** **Backup & Restore** can now export Gboard's own personal data to a ZIP file. You choose what to include: learned words, personal dictionary, blocked suggestions, emoji and GIF history, custom themes, pinned clipboard items, and Gboard settings.
+* **Gboard:** **Import Gboard data** restores the items you choose. Before importing, it lists everything that will be replaced. Afterwards, it shows the result for each item and offers **Restart Gboard**. Backups from a newer Gboard are rejected. Only pinned clipboard items are included, and Gboard may ask for contacts access after you restore settings.
+
+### 🐛 Bug Fixes
+
+* **Gboard:** **Frosted Glass**: fix an issue where invoking the keyboard could leave the background transparent without blur until you tap a key, by scheduling a single next-frame redraw after a new blur surface is created.
+
+### ✨ 新功能
+
+* **Gboard:** **備份與還原**新增 Gboard 個人化資料匯出，可以自選要存進 ZIP 檔的項目：記憶字詞、個人字典、封鎖的建議字詞、表情符號與 GIF 紀錄、自訂主題、已固定的剪貼簿項目和 Gboard 設定。
+* **Gboard:** 「匯入 Gboard 資料」可以自選要還原的項目。匯入前會列出所有會被覆蓋的內容，完成後逐項顯示結果，並提供「重新啟動 Gboard」。較新版本 Gboard 的備份無法匯入。剪貼簿只包含已固定的項目；還原 Gboard 設定後，Gboard 可能會要求聯絡人權限。
+
+### 🐛 修復
+
+* **Gboard:** **磨砂玻璃**：修復開啟鍵盤時背景可能只剩透明、沒有顯示模糊效果，必須按下任意按鍵後才恢復的問題；現在建立新的模糊表面後會自動補排一次下一幀重繪。
+
+## [4.5.0-dev.4](https://github.com/jasonwu1994/Gboard-patches/compare/v4.5.0-dev.3...v4.5.0-dev.4) (2026-11-24)
+
+### ✨ New Features
+
+* **Gboard:** **Clipboard Enhancements** adds an optional **Select All** button at the far left of the clipboard edit toolbar. Enable it under **Patches → Clipboard → General**, where the setting includes a description and preview. **Select All** includes pinned clips by default. Turn on **Exclude pinned clips** to select only unpinned clips, then use Gboard’s built-in **Delete** button to remove the selection.
+
+### ✨ 新功能
+
+* **Gboard:** **剪貼簿增強**新增「編輯時新增全選按鈕」，預設關閉。可在 **Patches → 剪貼簿 → 一般**查看說明、預覽並開啟。啟用後，「全選」會出現在編輯工具列最左側，預設包含釘選項目。開啟「排除釘選」後，全選只勾選未釘選項目，再按 Gboard 原生刪除鍵即可批次刪除。
+
+## [4.5.0-dev.3](https://github.com/jasonwu1994/Gboard-patches/compare/v4.5.0-dev.2...v4.5.0-dev.3) (2026-11-23)
+
+### ✨ New Features
+
+* **Gboard:** add 9 more buttons to the `Toolbar Editing Buttons` patch: Forward Delete, Paste as plain text, Home, End, Tab, and the Left, Right, Up, and Down arrow keys.
+* **Gboard:** toolbar button labels for `Toolbar Editing Buttons`, `Floating Web Search`, and `Incognito Mode Toggle` now follow the **Language** setting on the `Patches` settings page instead of always showing English.
+
+### 🐛 Bug Fixes
+
+* **Gboard:** **Toolbar Editing Buttons**: redraw the Select All icon so it no longer looks identical to Gboard's built-in Resize button.
+
+### ✨ 新功能
+
+* **Gboard:** `Toolbar Editing Buttons` Patch 新增 9 個按鈕：向前刪除、純文字貼上、行首、行尾、Tab，以及上、下、左、右方向鍵。
+* **Gboard:** `Toolbar Editing Buttons`、`Floating Web Search` 與 `Incognito Mode Toggle` 的工具列按鈕文字改為跟隨 `Patches` 設定頁的「語言」設定，不再固定顯示英文。
+
+### 🐛 修復
+
+* **Gboard:** **Toolbar Editing Buttons**：重新繪製「全選」圖示，不再與 Gboard 內建的「調整大小」按鈕完全相同。
+
+## [4.5.0-dev.2](https://github.com/jasonwu1994/Gboard-patches/compare/v4.5.0-dev.1...v4.5.0-dev.2) (2026-11-23)
+
+### ✨ New Features
+
+* **Gboard:** add 11 more languages to the `Patches` settings page: Simplified Chinese, Japanese, Korean, Spanish, Brazilian Portuguese, Russian, German, French, Vietnamese, Indonesian, and Turkish. When **Language** is set to **System default**, the settings page follows your system language if it is supported; you can also pick any of the 13 bundled languages manually. Any text that is not translated yet is shown in English.
+
+### ✨ 新功能
+
+* **Gboard:** `Patches` 設定頁新增 11 種語言：簡體中文、日文、韓文、西班牙文、巴西葡萄牙文、俄文、德文、法文、越南文、印尼文與土耳其文。「語言」設為「跟隨系統」時，若系統語言在支援範圍內，設定頁會自動切換；也可以手動選擇任一種內建語言（共 13 種）。尚未翻譯的文字會以英文顯示。
+
+## [4.5.0-dev.1](https://github.com/jasonwu1994/Gboard-patches/compare/v4.4.0...v4.5.0-dev.1) (2026-11-22)
+
+### ✨ New Features
+
+* **Gboard:** **Web Clipboard**: add bidirectional image and screenshot sync. Copy an image or take a screenshot on your phone to see it in the web portal right away, or upload, paste, or drag-and-drop one or multiple images from your browser directly into your phone's clipboard and Gboard clipboard history.
+* **Gboard:** **Web Clipboard**: upgrade the image viewer and workspace UI with a fullscreen lightbox featuring fixed full-height left/right navigation edges, a bottom thumbnail filmstrip for quick switching, top-right copy/download/close actions, compact upload previews, a checkerboard backdrop for transparent images, and refined empty states and same-day timestamps.
+
+### 🐛 Bug Fixes
+
+* **Gboard:** **Web Clipboard**: fix cleared messages reappearing after reloading the page by clearing the phone-hosted latest clipboard snapshot along with the browser thread.
+* **Gboard:** **Web Clipboard**: fix message ordering when phone and computer clocks differ by ordering thread items using the browser's local receive time.
+* **Gboard:** **Web Clipboard**: fix top action button clipping in the image lightbox, corner border clipping on the drag-and-drop overlay, and potential history entry collisions when uploading multiple images at once.
+
+### ✨ 新功能
+
+* **Gboard:** **Web Clipboard**：新增雙向圖片與截圖同步。在手機複製圖片或截圖後會即時顯示在網頁端；在電腦網頁點選、貼上或拖曳單張／多張圖片，也會直接同步到手機系統剪貼簿與 Gboard 剪貼簿歷史中。
+* **Gboard:** **Web Clipboard**：優化圖片檢視與介面體驗，包含全新全螢幕圖片預覽燈箱（固定左右全高切換區域、底部所有圖片縮圖預覽列、右上角複製／下載／關閉按鈕）、精簡的待傳圖片列、透明圖片棋盤格底紋，以及更俐落的空狀態與同日時間戳顯示。
+
+### 🐛 修復
+
+* **Gboard:** **Web Clipboard**：修復清空對話後重新整理網頁時舊訊息會再次出現的問題，現在清空時會一併重置手機端快取的最新剪貼簿狀態。
+* **Gboard:** **Web Clipboard**：修復手機與電腦系統時間存在誤差時訊息排序錯亂的問題，改以電腦端實際收到訊息的時間排序。
+* **Gboard:** **Web Clipboard**：修復圖片預覽燈箱頂部按鈕裁切、拖曳上傳外框四角邊線被遮擋，以及連續上傳多張圖片時 Gboard 剪貼簿歷史項目可能互相覆蓋的問題。
+
+## [4.4.0](https://github.com/jasonwu1994/Gboard-patches/compare/v4.3.0...v4.4.0) (2026-11-21)
+
+### ✨ New Features
+
+* **Gboard:** switch icon sizing in the G logo patch from dp to percentages. Your icons can now get biiiiiig!
+* **Gboard:** add support for custom package names in Package Rename.
+* **Gboard:** add the Shift + Backspace Forward Delete patch. Hold Shift and press Backspace to delete the character after the cursor, like the Delete key on a computer keyboard.
+* **Gboard:** add a **Rambler Auto Stop** option (Off, 3 seconds, 5 seconds, or custom 1–59 seconds) to **Advanced Voice Typing** to automatically stop Rambler voice typing and keep the text after the chosen period of silence.
+* **Gboard:** add a **Shortcut position** option (**First** or **Last**) to **Long-Press Editing Shortcuts** to choose where the editing shortcut appears in a key's long-press popup.
+
+### 🐛 Bug Fixes
+
+* **Gboard:** fix **Key transparency** in **Frosted Glass** not applying to the circular background behind the microphone or other shortcut in the top-right toolbar slot, while keeping the icon clear and preserving transparent idle states.
+* **Gboard:** keep standard voice typing in Traditional Chinese (zh-TW) on Gboard's built-in S3 recognizer with **Advanced Voice Typing**, and allow S3 voice typing in airplane mode when a usable network (such as Wi-Fi) is connected.
+
+### ✨ 新功能
+
+* **Gboard:** G logo patch：圖示大小從 dp 改為百分比調整，現在你的圖示可以變得超級大！
+* **Gboard:** Package Rename 新增自訂套件名稱功能。
+* **Gboard:** 新增「Shift + Backspace Forward Delete」Patch。按住 Shift 再按退格鍵，就能刪除游標右邊的字，就像電腦鍵盤上的 Delete 鍵。
+* **Gboard:** 在「進階語音輸入」新增「Rambler 自動停止」選項（關閉、3 秒、5 秒或自訂 1–59 秒），停止說話達設定時間後自動結束 Rambler 語音輸入並保留文字。
+* **Gboard:** 在「長按編輯快捷鍵」新增「快捷鍵位置」選項（第一個／最後一個），可自訂快捷鍵在長按選單中的位置。
+
+### 🐛 修復
+
+* **Gboard:** 修復「磨砂玻璃」的「按鍵透明度」未套用到工具列最右側麥克風或其他快捷按鈕圓底的問題，同時保持前景圖示清晰並保留自訂主題的待機透明狀態。
+* **Gboard:** 搭配「進階語音輸入」時，讓繁體中文（zh-TW）標準語音輸入維持使用 Gboard 內建 S3 辨識器，並修復飛航模式下已連上可用網路（如 Wi-Fi）時 S3 語音輸入被拒絕的問題。
+
+## [4.4.0-dev.5](https://github.com/jasonwu1994/Gboard-patches/compare/v4.4.0-dev.3...v4.4.0-dev.5) (2026-11-21)
+
+### ✨ New Features
+
+* **Gboard:** add a **Rambler Auto Stop** option (Off, 3 seconds, 5 seconds, or custom 1–59 seconds) to **Advanced Voice Typing** to automatically stop Rambler voice typing and keep the text after the chosen period of silence.
+* **Gboard:** add a **Shortcut position** option (**First** or **Last**) to **Long-Press Editing Shortcuts** to choose where the editing shortcut appears in a key's long-press popup.
+
+### 🐛 Bug Fixes
+
+* **Gboard:** fix **Key transparency** in **Frosted Glass** not applying to the circular background behind the microphone or other shortcut in the top-right toolbar slot, while keeping the icon clear and preserving transparent idle states.
+* **Gboard:** keep standard voice typing in Traditional Chinese (zh-TW) on Gboard's built-in S3 recognizer with **Advanced Voice Typing**, and allow S3 voice typing in airplane mode when a usable network (such as Wi-Fi) is connected.
+
+### ✨ 新功能
+
+* **Gboard:** 在「進階語音輸入」新增「Rambler 自動停止」選項（關閉、3 秒、5 秒或自訂 1–59 秒），停止說話達設定時間後自動結束 Rambler 語音輸入並保留文字。
+* **Gboard:** 在「長按編輯快捷鍵」新增「快捷鍵位置」選項（第一個／最後一個），可自訂快捷鍵在長按選單中的位置。
+
+### 🐛 修復
+
+* **Gboard:** 修復「磨砂玻璃」的「按鍵透明度」未套用到工具列最右側麥克風或其他快捷按鈕圓底的問題，同時保持前景圖示清晰並保留自訂主題的待機透明狀態。
+* **Gboard:** 搭配「進階語音輸入」時，讓繁體中文（zh-TW）標準語音輸入維持使用 Gboard 內建 S3 辨識器，並修復飛航模式下已連上可用網路（如 Wi-Fi）時 S3 語音輸入被拒絕的問題。
+
+## [4.4.0-dev.3](https://github.com/jasonwu1994/Gboard-patches/compare/v4.4.0-dev.2...v4.4.0-dev.3) (2026-11-18)
+
+### ✨ New Features
+
+* **Gboard:** add the Shift + Backspace Forward Delete patch. Hold Shift and press Backspace to delete the character after the cursor, like the Delete key on a computer keyboard.
+
+### ✨ 新功能
+
+* **Gboard:** 新增「Shift + Backspace Forward Delete」Patch。按住 Shift 再按退格鍵，就能刪除游標右邊的字，就像電腦鍵盤上的 Delete 鍵。
+
+## [4.4.0-dev.2](https://github.com/jasonwu1994/Gboard-patches/compare/v4.4.0-dev.1...v4.4.0-dev.2) (2026-11-14)
+
+### ✨ New Features
+
+* **Gboard:** add support for custom package names in Package Rename.
+
+### ✨ 新功能
+
+* **Gboard:** Package Rename 新增自訂套件名稱功能。
+
+## [4.4.0-dev.1](https://github.com/jasonwu1994/Gboard-patches/compare/v4.3.0...v4.4.0-dev.1) (2026-11-12)
+
+### ✨ New Features
+
+* **Gboard:** switch icon sizing in the G logo patch from dp to percentages. Your icons can now get biiiiiig!
+
+### ✨ 新功能
+
+* **Gboard:** G logo patch：圖示大小從 dp 改為百分比調整，現在你的圖示可以變得超級大！
+
+## [4.3.0](https://github.com/jasonwu1994/Gboard-patches/compare/v4.2.0...v4.3.0) (2026-11-12)
+
+### ✨ New Features
+
+* **Gboard:** add an FAQ section to the Frosted Glass page, with links for when the effect isn't working and for flickering on Pixel phones.
+* **Gboard:** change the defaults of two settings: English Up-Flick Uppercase is now off and the Access Points menu style is now on. Settings you have already saved are kept.
+
+### 🐛 Bug Fixes
+
+* **Gboard:** fix the keyboard closing by itself with Frosted Glass enabled ("Software rendering doesn't support drawRenderNode"). If blur fails to draw, the keyboard now falls back to its theme.
+* **Gboard:** make "Extend to navigation bar" work on Android 15 and below. The navigation bar follows the keyboard's transparency, without blur.
+* **Gboard:** make "Extend to navigation bar" work with narrower docked keyboards, such as one-handed mode.
+
+### ✨ 新功能
+
+* **Gboard:** 在「磨砂玻璃」頁面新增 FAQ 區塊，提供「為什麼磨砂玻璃沒有效果？」和「為什麼 Pixel 手機輸入文字時會閃爍？」的說明連結。
+* **Gboard:** 調整兩項設定的預設值：「英文鍵盤上滑大小寫」改為關閉，「Access Points 選單樣式」改為開啟。已儲存的設定不受影響。
+
+### 🐛 修復
+
+* **Gboard:** 修復啟用磨砂玻璃後鍵盤自行關閉的問題（`Software rendering doesn't support drawRenderNode`）。模糊效果繪製失敗時，鍵盤會改回使用主題背景。
+* **Gboard:** 修復「延伸到導覽列」在 Android 15 以下沒有效果的問題。導覽列會跟隨鍵盤的透明度，但沒有模糊效果。
+* **Gboard:** 修復「延伸到導覽列」在單手模式等較窄的固定式鍵盤上沒有效果的問題。
+
 ## [4.3.0-dev.1](https://github.com/jasonwu1994/Gboard-patches/compare/v4.2.0...v4.3.0-dev.1) (2026-11-06)
 
 ### ✨ New Features

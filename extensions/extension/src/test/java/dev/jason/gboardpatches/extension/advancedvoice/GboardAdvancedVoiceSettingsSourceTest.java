@@ -1,5 +1,6 @@
 package dev.jason.gboardpatches.extension.advancedvoice;
 
+import dev.jason.gboardpatches.extension.settings.GboardSettingsTextFiles;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,8 +22,7 @@ public final class GboardAdvancedVoiceSettingsSourceTest {
         String availability = read(root,
                 "extensions/extension/src/main/java/dev/jason/gboardpatches/extension/"
                         + "settings/GboardPatchesFeatureAvailability.java");
-        String settingsText = read(root,
-                "extensions/extension/src/main/settings-text/gboard_settings_text.xml");
+        String settingsText = GboardSettingsTextFiles.englishAndTraditionalChinese();
 
         Assert.assertTrue(keyboardGroup.contains(
                 "new GboardAdvancedVoiceSettingsFeature(context)"));
@@ -39,8 +39,12 @@ public final class GboardAdvancedVoiceSettingsSourceTest {
                 "語音輸入分為三種：標準、標準-進階功能（彩色麥克風）以及 Rambler。"));
         Assert.assertEquals(2, count(feature,
                 "new GboardPatchesSettingsContract.ToggleRow("));
-        Assert.assertEquals(0, count(feature,
+        Assert.assertEquals(1, count(feature,
                 "new GboardPatchesSettingsContract.SelectorRow("));
+        Assert.assertEquals(1, count(feature,
+                "GboardPatchesSettingsContract.showChoiceDialog(host"));
+        Assert.assertTrue(feature.contains("GboardRamblerAutoStopSettings.readSeconds(preferences)"));
+        Assert.assertTrue(feature.contains("GboardRamblerAutoStopSettings.writeSeconds("));
         Assert.assertFalse(feature.contains("GboardAdvancedVoiceSettings.readBackend("));
         Assert.assertFalse(feature.contains("showBackendDialog("));
         Assert.assertFalse(feature.contains("saveBackend("));
@@ -78,9 +82,6 @@ public final class GboardAdvancedVoiceSettingsSourceTest {
         Assert.assertTrue(availability.contains("FEATURE_ADVANCED_VOICE_TYPING"));
         Assert.assertTrue(availability.contains(
                 "dev.jason.gboardpatches.feature.advanced_voice_typing"));
-        Assert.assertTrue(settingsText.contains("Rambler(限線上)"));
-        Assert.assertTrue(settingsText.contains(
-                "切換後須強制停止並重新啟動 Gboard 才會生效"));
         Assert.assertFalse(settingsText.contains("Experimental Rambler"));
 
     }

@@ -1,7 +1,7 @@
 {
-    "created_at": "2026-11-26T02:35:00+11:00",
-    "description": "Custom astroboii47 build based on Gboard Patches 4.3.0-dev.1. Adds emoji and symbol shortcodes, optional quick GIF queries, smoother cursor trackpad movement, and tuned smooth character deletion. Compatible with GinType as a second Morphe source; enable Package Rename in this bundle only.",
-    "download_url": "https://github.com/astroboii47/Gboard-patches/releases/download/v4.3.0-astro.1/patches-4.3.0-astro.1.mpp",
-    "signature_download_url": "",
-    "version": "4.3.0-astro.1"
+  "created_at": "2026-11-26T02:50:00+11:00",
+  "description": "Custom astroboii47 build based on Gboard Patches 4.5.0-dev.7. Includes the latest upstream backup, clipboard, toolbar, voice, package-rename, and Frosted Glass updates plus emoji and symbol shortcodes, optional quick GIF queries, smoother cursor trackpad movement, and tuned smooth character deletion. Compatible with GinType as a second Morphe source; enable Package Rename in this bundle only.",
+  "download_url": "https://github.com/astroboii47/Gboard-patches/releases/download/v4.5.0-astro.1/patches-4.5.0-astro.1.mpp",
+  "signature_download_url": "",
+  "version": "4.5.0-astro.1"
 }

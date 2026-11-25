@@ -4,8 +4,9 @@ import com.google.gson.JsonParser
 import dev.jason.gboardpatches.patches.gboard.features.advancedvoice.gboardAdvancedVoice1803ZhTwPatch
 import dev.jason.gboardpatches.patches.gboard.features.advancedvoice.gboardAdvancedVoiceFeatureMarkerPatch
 import dev.jason.gboardpatches.patches.gboard.features.advancedvoice.gboardAdvancedVoiceFlagValuePatch
-import dev.jason.gboardpatches.patches.gboard.features.advancedvoice.gboardAdvancedVoiceLanguageDownloadGuardPatch
+import dev.jason.gboardpatches.patches.gboard.features.advancedvoice.gboardS3AirplaneModePatch
 import dev.jason.gboardpatches.patches.gboard.features.rambler.gboardRambler1803OfficialSelectorPatch
+import dev.jason.gboardpatches.patches.gboard.features.rambler.gboardRamblerAutoStopPatch
 import dev.jason.gboardpatches.patches.gboard.shared.gboardPatchesSettingsPatch
 import dev.jason.gboardpatches.patches.gboard.shared.generated.GboardTargetAdmission
 import java.nio.charset.StandardCharsets
@@ -48,8 +49,9 @@ class GboardAdvancedVoicePatchContractTest {
                 gboardAdvancedVoiceFeatureMarkerPatch,
                 gboardAdvancedVoiceFlagValuePatch,
                 gboardAdvancedVoice1803ZhTwPatch,
-                gboardAdvancedVoiceLanguageDownloadGuardPatch,
                 gboardRambler1803OfficialSelectorPatch,
+                gboardRamblerAutoStopPatch,
+                gboardS3AirplaneModePatch,
             ),
             gboardAdvancedVoiceTypingPatch.dependencies.toList(),
         )
